@@ -2,7 +2,7 @@
 #define GDT_H_
 #include <asm/inttypes.h>
 
-
+void gdt_init(void);
 
 struct gdt_entry
 {
@@ -21,6 +21,5 @@ struct gdt_ptr
 } __attribute((packed));
 
 
-void gdt_init(void);
 
 #endif

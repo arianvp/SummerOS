@@ -1,3 +1,5 @@
+#ifndef IDT_H_
+#define IDT_H_
 #include <asm/inttypes.h>
 struct idt_entry
 {
@@ -49,3 +51,4 @@ extern void isr28(void);
 extern void isr29(void);
 extern void isr30(void);
 extern void isr31(void);
+#endif

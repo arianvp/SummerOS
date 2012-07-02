@@ -1,12 +1,18 @@
 #include <asm/inttypes.h>
 #include <asm/io.h>
-#include "kscreen.h"
+#include <asm/gdt.h>
+#include <asm/idt.h>
+#include <video/kvideo.h>
 
 uint32_t kmain(void)
 {
-	char *vidmem = (char *) 0xb8000;
-	unsigned int i = 0;
 	kcls();
-	kputs("Hello, World!");
+	kputs("Hello, World!\n");
+	gdt_init();
+	idt_init();
+	asm volatile("int $0x3");
+	asm volatile("int $0x4");
+	asm volatile("int $0x5");
+	asm volatile("int $0x6");
 	return 0xDEADBABA;
 }
