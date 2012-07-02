@@ -1,0 +1,16 @@
+{
+	"folders":
+	[
+		{
+			"path": "/home/arian/git/SummerOS"
+		}
+	],
+	"settings":
+	{
+		"sublimeclang_options":
+		[
+			"-m32",
+			"-I${folder:${project_path:SummerOS.sublime-project}}/include"
+		]
+	}
+}
