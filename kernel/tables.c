@@ -1,5 +1,6 @@
 #include <asm/gdt.h>
 #include <asm/idt.h>
+#include <asm/io.h>
 #include <kstring.h>
 extern void gdt_flush(struct gdt_ptr* ptr);
 
@@ -48,6 +49,18 @@ void idt_init()
 
 
 	kmemset(&idt_entries, 0, sizeof(struct idt_entry) * 256);
+
+	outb(0x20, 0x11);
+	outb(0xA0, 0x11);
+	outb(0x21, 0x20);
+	outb(0xA1, 0x28);
+	outb(0x21, 0x04);
+	outb(0xA1, 0x02);
+	outb(0x21, 0x01);
+	outb(0xA1, 0x01);
+	outb(0x21, 0x0);
+	outb(0xA1, 0x0);
+
 	idt_set_gate(0, isr0, 0x08, 0x8e);
 	idt_set_gate(1, isr1, 0x08, 0x8e);
 	idt_set_gate(2, isr2, 0x08, 0x8e);
@@ -80,6 +93,23 @@ void idt_init()
 	idt_set_gate(29, isr29, 0x08, 0x8e);
 	idt_set_gate(30, isr30, 0x08, 0x8e);
 	idt_set_gate(31, isr31, 0x08, 0x8e);
+	idt_set_gate(32, irq0,  0x08, 0x8e);
+	idt_set_gate(33, irq1,  0x08, 0x8e);
+	idt_set_gate(34, irq2,  0x08, 0x8e);
+	idt_set_gate(35, irq3,  0x08, 0x8e);
+	idt_set_gate(36, irq4,  0x08, 0x8e);
+	idt_set_gate(37, irq5,  0x08, 0x8e);
+	idt_set_gate(38, irq6,  0x08, 0x8e);
+	idt_set_gate(39, irq7,  0x08, 0x8e);
+	idt_set_gate(40, irq8,  0x08, 0x8e);
+	idt_set_gate(41, irq9,  0x08, 0x8e);
+	idt_set_gate(42, irq10, 0x08, 0x8e);
+	idt_set_gate(43, irq11, 0x08, 0x8e);
+	idt_set_gate(44, irq12, 0x08, 0x8e);
+	idt_set_gate(45, irq13, 0x08, 0x8e);
+	idt_set_gate(46, irq14, 0x08, 0x8e);
+	idt_set_gate(47, irq15, 0x08, 0x8e);
+
 	idt_flush(&idtptr);
 
 }
